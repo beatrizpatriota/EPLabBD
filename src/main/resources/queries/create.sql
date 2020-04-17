@@ -95,7 +95,8 @@ CREATE TABLE matricula(
     id SERIAL PRIMARY KEY,
     id_cliente INT NOT NULL UNIQUE REFERENCES cliente(id) ON DELETE RESTRICT,
     id_personal INT NOT NULL REFERENCES funcionario(id) ON DELETE RESTRICT,
-    id_plano INT NOT NULL REFERENCES plano(id) ON DELETE RESTRICT
+    id_plano INT NOT NULL REFERENCES plano(id) ON DELETE RESTRICT,
+    data_matricula DATE NOT NULL
 );
 
 DROP TABLE IF EXISTS aula CASCADE ;
@@ -105,11 +106,18 @@ CREATE TABLE aula(
     tipo varchar(50) NOT NULL
 );
 
-DROP TABLE IF EXISTS oferecimento;
+DROP TABLE IF EXISTS oferecimento CASCADE ;
 CREATE TABLE oferecimento(
     id SERIAL PRIMARY KEY,
     id_professor INT NOT NULL REFERENCES funcionario(id) ON DELETE RESTRICT,
     id_aula INT NOT NULL REFERENCES aula(id) ON DELETE RESTRICT,
     id_sala INT NOT NULL REFERENCES sala(id) ON DELETE RESTRICT,
     horario TIMESTAMP NOT NULL
+);
+
+DROP TABLE IF EXISTS rel_matricula_oferecimento CASCADE ;
+CREATE TABLE rel_matricula_oferecimento(
+    id_matricula    INT     NOT NULL references matricula (id) ON DELETE CASCADE,
+    id_oferecimento INT     NOT NULL references oferecimento (id) ON DELETE CASCADE,
+    presenca        boolean not null
 );
