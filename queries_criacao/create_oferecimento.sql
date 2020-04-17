@@ -1,0 +1,13 @@
+DROP TABLE oferecimento;
+CREATE TABLE oferecimento(
+    id SERIAL PRIMARY KEY,
+    id_professor INT NOT NULL REFERENCES funcionario(id) ON DELETE RESTRICT,
+    id_aula INT NOT NULL REFERENCES aula(id) ON DELETE RESTRICT,
+    id_sala INT NOT NULL REFERENCES sala(id) ON DELETE RESTRICT,
+    horario TIMESTAMP NOT NULL
+);
+
+
+INSERT INTO oferecimento VALUES
+(1,3,1,1,'2020-04-16 18:00:00')
+
