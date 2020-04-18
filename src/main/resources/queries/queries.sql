@@ -39,7 +39,7 @@ from (Select c.id      as id_cliente,
       from cliente c
                join matricula m on c.id = m.id_cliente
                join plano p on p.id = m.id_plano
-      where DATE(m.data_matricula + ((INTERVAL '1 month') * duracao)) > current_date) as f
+      where DATE(m.data_matricula + ((INTERVAL '1 month') * duracao)) < current_date) as f
 order by id_cliente;
 
 --Query 3: Quais tipos de aula o professor oferece
@@ -73,7 +73,8 @@ from (SELECT *
                join (
           SELECT m.id, nome, sobrenome
           from matricula m
-                   join (SELECT * from cliente WHERE nome LIKE 'Ezekiel') as c
+                   join (SELECT * from cliente) as c
                         on m.id_cliente = c.id
       ) as mat on id_matricula = mat.id) as relAll
-         join aula on relAll.id_aula = aula.id;
+         join aula on relAll.id_aula = aula.id
+order by nome_cliente;

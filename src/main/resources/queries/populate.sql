@@ -210,7 +210,7 @@ INSERT INTO plano VALUES
 
 INSERT INTO filial VALUES
 (1,'Sede','sede@acad.com', '(11)4432-5453', 1),
-(2, 'Filial Anália Franco','filia_analia@acad.com', '(11)6453-7354', 2),
+(2, 'Filial Anália Franco','filial_analia@acad.com', '(11)6453-7354', 2),
 (3, 'Filial Belém','filial_belem@acad.com', '(11)8523-3486', 3);
 
 INSERT INTO sala VALUES
@@ -425,10 +425,17 @@ INSERT INTO aula VALUES
 (4, 'Step', 'Aerobico');
 
 INSERT INTO oferecimento VALUES
-(1,3,1,1,'2020-04-16 18:00:00');
+(1,3,1,1,'2020-04-16 18:00:00'),
+(2,5,2,9,'2020-04-18 16:00:00');
 
 INSERT INTO rel_matricula_oferecimento
 VALUES (1, 1, false),
+       (2, 2, false),
+       (4, 2, false),
+       (6, 2, false),
+       (8, 2, false),
+       (1, 2, false),
+       (5, 2, false),
        (3, 1, false),
        (5, 1, false),
        (7, 1, false),

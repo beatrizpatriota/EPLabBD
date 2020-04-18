@@ -119,5 +119,5 @@ DROP TABLE IF EXISTS rel_matricula_oferecimento CASCADE ;
 CREATE TABLE rel_matricula_oferecimento(
     id_matricula    INT     NOT NULL references matricula (id) ON DELETE CASCADE,
     id_oferecimento INT     NOT NULL references oferecimento (id) ON DELETE CASCADE,
-    presenca        boolean not null
+    presenca        boolean NOT NULL
 );
