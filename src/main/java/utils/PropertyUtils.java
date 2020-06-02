@@ -27,7 +27,19 @@ public class PropertyUtils {
         }
     }
 
+    public void setProperties(String key, String value) {
+        properties.setProperty(key, value);
+    }
+
     public String getProperty(String propertyName) {
         return properties.getProperty(propertyName);
+    }
+
+    public String filePath(String nameKey) {
+        return getClass().getClassLoader().getResource(nameKey).getPath();
+    }
+
+    public Properties getProperties() {
+        return properties;
     }
 }

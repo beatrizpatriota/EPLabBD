@@ -16,13 +16,14 @@ public class SQLConfig {
         String url = propertyUtils.getProperty("datasource.url");
         String user = propertyUtils.getProperty("datasource.user");
         String password = propertyUtils.getProperty("datasource.password");
-        if (connection == null) {
-            try {
+        try {
+            if (connection == null || connection.isClosed()) {
+
                 Class.forName("org.postgresql.Driver");
                 connection = DriverManager.getConnection(url, user, password);
-            } catch (SQLException | ClassNotFoundException e) {
-                e.printStackTrace();
             }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
         return connection;
     }
