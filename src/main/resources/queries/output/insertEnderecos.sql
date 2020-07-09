@@ -1,4 +1,4 @@
-INSERT INTO enderecos VALUES (1,'Rua Maria Eleonora',3,'','Tatuapé','São Paulo','SP','03081020'),
+INSERT INTO endereco VALUES (1,'Rua Maria Eleonora',3,'','Tatuapé','São Paulo','SP','03081020'),
 (2,'Rua Valter Gazarra',289,'','Jardim Anália Franco','São Paulo','SP','03337055'),
 (3,'Rua Doutor Siqueira Campos',113,'','Liberdade','São Paulo','SP','01509020'),
 (4,'Avenida Paes de Barros - de 2495 ao fim - lado ímpar',39,'','Parque da Mooca','São Paulo','SP','03149100'),

@@ -66,7 +66,7 @@ public class CriarQueries {
     }
 
     public static void criarEnderecos() throws IOException {
-        File file = new File("/home/daniel/IdeaProjects/EPLabBD/src/main/resources/queries/output/insertEnderecosFILIAAAL.sql");
+        File file = new File("/home/daniel/IdeaProjects/EPLabBD/src/main/resources/queries/output/TESTE.sql");
         if (file.createNewFile()) System.out.println("Arquivo Criado: "+ file.getPath());
         else System.out.println("FAIO");
         FileWriter fileWriter = new FileWriter(file);
@@ -78,10 +78,10 @@ public class CriarQueries {
 
         StringBuilder query = new StringBuilder("INSERT INTO enderecos VALUES ");
         ArrayList<Integer> numeros = new ArrayList();
-        for (int i = 1; i <= 500000; i++) {
+        for (int i = 1; i <= 5000000; i++) {
             numeros.add(i);
         }
-        for (int i = 1; i <= 500000; i++) {
+        for (int i = 1; i <= 5000000; i++) {
             CEP endereco = listaDeEnderecos.get(gerador.randomiza(tamanhoListaEnderecos - 1));
             query.append("(").append(i).append(",");
             query.append("\'").append(endereco.getLogradouro()).append("\'").append(",");
@@ -249,8 +249,8 @@ public class CriarQueries {
         for (int i = 1; i <= 100; i++) {
             query.append("(").append(i).append(",");
             query.append(idProfessor.remove(gerador.randomiza(idProfessor.size()-1))).append(",");
-            query.append(idSala.remove(gerador.randomiza(idSala.size()-1))).append(",");
             query.append(idAula.get(gerador.randomiza(idAula.size()-1))).append(",");
+            query.append(idSala.remove(gerador.randomiza(idSala.size()-1))).append(",");
             query.append("\'").append(gerador.data(2020)).append(" ").append(gerador.hora()).append("\'").append(")").append(",\n");
         }
         query.append(";\n ");
@@ -258,5 +258,35 @@ public class CriarQueries {
         fileWriter.flush();
         fileWriter.close();
 
+    }
+
+    public static void criarRelMat() throws IOException {
+        File file = new File("/home/daniel/IdeaProjects/EPLabBD/src/main/resources/queries/output/insertRelMatricula.sql");
+        if (file.createNewFile()) System.out.println("Arquivo Criado");
+        else System.out.println("FAIO");
+        FileWriter fileWriter = new FileWriter(file);
+
+        Generator gerador = new Generator();
+
+        StringBuilder query = new StringBuilder("INSERT INTO rel_matricula_oferecimento VALUES ");
+        ArrayList<Integer> idMatricula = new ArrayList();
+        ArrayList<Integer> idOferecimento = new ArrayList();
+        ArrayList<Integer> idAula = new ArrayList();
+        for (int i = 1; i <= 5000; i++) {
+            idMatricula.add(i);
+        }
+        for (int i = 1; i <= 200; i++) {
+            idOferecimento.add(i);
+        }
+
+        for (int i = 1; i <= 3500; i++) {
+            query.append("(").append(idMatricula.remove(gerador.randomiza(idOferecimento.size()-1))).append(",");
+            query.append(idOferecimento.get(gerador.randomiza(idAula.size()-1))).append(",");
+            query.append("false").append(")").append(",\n");
+        }
+        query.append(";\n ");
+        fileWriter.write(query.toString());
+        fileWriter.flush();
+        fileWriter.close();
     }
 }

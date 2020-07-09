@@ -24,7 +24,7 @@ public class ApplicationStart {
             openDevelopConsole();
 
         if (Arrays.stream(args).anyMatch(s -> s.contains("-criarquery")))
-            CriarQueries.criarOferecimentos();
+            CriarQueries.criarRelMat();
 
 
     }
