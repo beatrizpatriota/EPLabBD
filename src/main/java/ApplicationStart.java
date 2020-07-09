@@ -1,14 +1,13 @@
-import config.Consumer;
 import config.Producer;
 import config.SQLConfig;
 import objects.SQLObject;
-import org.apache.kafka.common.serialization.StringSerializer;
+import utils.CriarQueries;
+import utils.Generator;
 import utils.PropertyUtils;
 
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
@@ -16,7 +15,7 @@ import java.util.concurrent.ExecutionException;
 public class ApplicationStart {
     static PropertyUtils propertyUtils = PropertyUtils.getInstance();
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+    public static void main(String[] args) throws ExecutionException, InterruptedException, IOException {
 
         if (Arrays.stream(args).anyMatch(s -> s.contains("-sql")))
             sqlWay();
@@ -24,8 +23,11 @@ public class ApplicationStart {
         if (Arrays.stream(args).anyMatch(s -> s.contains("-develop")))
             openDevelopConsole();
 
-    }
+        if (Arrays.stream(args).anyMatch(s -> s.contains("-criarquery")))
+            CriarQueries.criarOferecimentos();
 
+
+    }
 
 
 
@@ -48,7 +50,7 @@ public class ApplicationStart {
         while (scanner.hasNext()) {
 
             while (!s.endsWith(";\n"))
-                s += scanner.nextLine()+ "\n";
+                s += scanner.nextLine() + "\n";
 
 //        System.out.println(s);
 
@@ -61,9 +63,9 @@ public class ApplicationStart {
 
     private static String readDocument(String filename) {
         StringBuilder query = new StringBuilder();
-
+        System.out.println(propertyUtils.filePath(filename));
         try {
-            FileReader fileReader = (new FileReader(propertyUtils.filePath(filename)));
+            FileReader fileReader = (new FileReader(propertyUtils.getProperty(filename)));
             while (fileReader.ready()) {
                 query.append(Character.toChars(fileReader.read()));
             }
