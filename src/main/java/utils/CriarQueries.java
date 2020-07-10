@@ -172,7 +172,7 @@ public class CriarQueries {
 
         Generator gerador = new Generator();
 
-        StringBuilder query = new StringBuilder("INSERT INTO cliente VALUES ");
+        StringBuilder query = new StringBuilder("INSERT INTO matricula VALUES ");
         ArrayList<Integer> idCliente = new ArrayList();
         ArrayList<Integer> idPersonal = new ArrayList();
         for (int i = 1; i <= 5000; i++) {
@@ -186,7 +186,7 @@ public class CriarQueries {
             query.append(idCliente.remove(gerador.randomiza(idCliente.size()-1))).append(",");
             query.append(idPersonal.get(gerador.randomiza(idPersonal.size()-1))).append(",");
             query.append(gerador.randomiza(6)+1).append(",");
-            query.append("\'").append(gerador.data()).append("\'").append(")").append(",\n");
+            query.append("\'").append(gerador.data(2020)).append("\'").append(")").append(",\n");
         }
         query.append(";\n ");
         fileWriter.write(query.toString());
